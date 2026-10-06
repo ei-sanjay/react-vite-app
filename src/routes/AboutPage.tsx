@@ -1,0 +1,34 @@
+import { ROUTES } from '@/config/routes';
+
+export function AboutPage() {
+  return (
+    <div className="page about-page">
+      <h1>About this starter</h1>
+      <p>
+        Generated with <strong>create-react-starter-kit</strong> using a scalable{' '}
+        <strong>feature-based</strong> layout (domain modules under <code>src/features</code>).
+      </p>
+      <ul className="about-list">
+        <li>
+          <strong>Routes:</strong> <code>{ROUTES.HOME}</code>, <code>{ROUTES.COUNTER}</code>,{' '}
+          <code>{ROUTES.POSTS}</code>, <code>{ROUTES.FEEDBACK}</code>, <code>{ROUTES.ABOUT}</code>{' '}
+          (defined in <code>src/config/routes.ts</code>)
+        </li>
+        <li>
+          <strong>Extend features</strong> under <code>src/features/&lt;name&gt;/</code>.
+        </li>
+        <li>
+          <strong>Shared UI</strong> lives in <code>src/components/</code>. Prefer the{' '}
+          <code>@/</code> path alias.
+        </li>
+        <li>
+          <strong>Bootstrap</strong> is in <code>src/main.tsx</code> with providers in{' '}
+          <code>src/providers.tsx</code> and routing in <code>src/App.tsx</code>.
+        </li>
+      </ul>
+      <p>
+        Read <code>docs/getting-started.md</code> next, then <code>docs/selected-stack.md</code>.
+      </p>
+    </div>
+  );
+}

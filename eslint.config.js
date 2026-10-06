@@ -1,0 +1,87 @@
+import js from '@eslint/js';
+import globals from 'globals';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import importPlugin from 'eslint-plugin-import';
+import prettier from 'eslint-config-prettier';
+import tseslint from 'typescript-eslint';
+
+/** Import order (same convention as Biome assist organizeImports):
+ *  1. Node / npm packages
+ *  2. Blank line
+ *  3. Project alias (@/) and relative imports
+ *  4. Blank line
+ *  5. Styles (.css, .scss, …) last
+ */
+const importOrderRule = [
+  'error',
+  {
+    groups: ['builtin', 'external', 'internal', ['parent', 'sibling'], 'index', 'object'],
+    pathGroups: [
+      {
+        pattern: '@/**',
+        group: 'internal',
+      },
+      {
+        pattern: '*.{css,scss,sass,less}',
+        group: 'object',
+        position: 'after',
+        patternOptions: { matchBase: true },
+      },
+    ],
+    pathGroupsExcludedImportTypes: ['builtin', 'external'],
+    distinctGroup: false,
+    'newlines-between': 'always',
+    alphabetize: {
+      order: 'asc',
+      caseInsensitive: true,
+    },
+  },
+];
+
+export default [
+  { ignores: ['dist', 'coverage', 'storybook-static'] },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  {
+    files: ['**/*.{ts,tsx}'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
+      globals: globals.browser,
+    },
+    plugins: {
+      react,
+      'react-hooks': reactHooks,
+      import: importPlugin,
+    },
+    settings: {
+      react: { version: 'detect' },
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
+          project: './tsconfig.json',
+        },
+      },
+    },
+    rules: {
+      ...react.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
+      'import/order': importOrderRule,
+      'import/newline-after-import': 'error',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
+    },
+  },
+  {
+    files: ['*.config.{js,cjs,mjs,ts}', '.storybook/**/*.{js,cjs,mjs}', 'scripts/**/*.{js,mjs}'],
+    languageOptions: {
+      globals: globals.node,
+    },
+  },
+  prettier,
+];

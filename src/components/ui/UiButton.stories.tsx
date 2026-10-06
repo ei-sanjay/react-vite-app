@@ -1,0 +1,39 @@
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { UiButton } from '@/components/ui/UiButton';
+
+/**
+ * Shared button adapter used across demos.
+ * Prefer this over raw HTML buttons so UI library swaps stay localized.
+ */
+const meta = {
+  title: 'Components/UiButton',
+  component: UiButton,
+  tags: ['autodocs'],
+  args: {
+    children: 'Click me',
+  },
+  argTypes: {
+    onClick: { action: 'clicked' },
+    children: { control: 'text' },
+  },
+} satisfies Meta<typeof UiButton>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary: Story = {};
+
+export const SubmitLabel: Story = {
+  args: {
+    children: 'Send feedback',
+    type: 'submit',
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    children: 'Disabled',
+    disabled: true,
+  },
+};

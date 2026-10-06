@@ -1,0 +1,262 @@
+/* Global reset — most styling lives in styled components; keep layout tokens here */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #f5f7fb;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --brand: #1d4ed8;
+  --ok: #15803d;
+  --bad: #b91c1c;
+  --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(37, 99, 235, 0.12), transparent 40%),
+    linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+}
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  max-width: 72rem;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+}
+.app-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+}
+.brand {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+.brand-mark {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #2563eb, #0f172a);
+}
+.brand-name {
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+}
+.brand-tagline,
+.muted,
+.lede,
+.app-footer,
+.panel-note,
+.eyebrow {
+  color: var(--muted);
+}
+.brand-tagline,
+.eyebrow {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.app-nav {
+  display: flex;
+  gap: 0.5rem;
+}
+.nav-link {
+  text-decoration: none;
+  color: #475569;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.nav-link.active {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+.app-main {
+  flex: 1;
+}
+.app-footer {
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+  font-size: 0.875rem;
+}
+.hero {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+}
+.hero h1,
+.about-page h1,
+.panel-header h2 {
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+}
+.hero h1 {
+  margin-top: 0.5rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+.lede {
+  max-width: 40rem;
+  line-height: 1.6;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+.text-link {
+  color: var(--brand);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.stack-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+.stack-badge {
+  border: 1px solid var(--line);
+  background: #f8fafc;
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+.stack-badge-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  margin-right: 0.5rem;
+}
+.stack-badge-value {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.panels {
+  display: grid;
+  gap: 1.25rem;
+}
+@media (min-width: 1024px) {
+  .panels {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.panel {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+}
+.panel-header p {
+  margin: 0.35rem 0 0;
+  font-size: 0.875rem;
+}
+.panel-toolbar {
+  margin-bottom: 0.75rem;
+}
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.counter-value {
+  min-width: 3rem;
+  text-align: center;
+  font-size: 1.875rem;
+  font-family: 'DM Sans', sans-serif;
+}
+.post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+.post-list li {
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+}
+.feedback-form {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+.feedback-form label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.feedback-form input,
+.feedback-form textarea {
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+}
+.field-error,
+.error-text {
+  color: var(--bad);
+  font-size: 0.8rem;
+}
+.panel-note {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed #e2e8f0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+.ui-button {
+  appearance: none;
+  border: 0;
+  background: var(--brand);
+  color: #fff;
+  border-radius: 0.5rem;
+  padding: 0.55rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.ui-button:disabled {
+  opacity: 0.5;
+}
+.about-list {
+  margin: 1rem 0;
+  padding-left: 1.25rem;
+}

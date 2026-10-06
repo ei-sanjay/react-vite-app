@@ -1,0 +1,69 @@
+# Best practices
+
+## Code organization
+
+- Colocate feature UI, hooks, and tests under `src/features/<domain>/`.
+- Prefer small modules with clear exports over “utils dump” files.
+- Name features after domains (`billing`, `auth`), not technical junk drawers.
+- Keep route files as composers — they should not own fetching or form schemas.
+
+## HTTP & data
+
+- Define one API slice per domain (or a carefully shared base API).
+- Use `tagTypes` for cache invalidation instead of manual refetches when possible.
+- Put auth in `prepareHeaders`.
+- Prefer generated hooks in components; avoid dispatching raw endpoint actions unless needed.
+- Treat server cache and client UI state as separate concerns.
+
+## Linting & formatting
+
+- Tooling: **ESLint + Prettier**
+- ESLint for code quality; Prettier for consistent formatting (`eslint-config-prettier` disables conflicting rules)
+- `lint:fix` runs `eslint src tests --fix` to auto-sort imports and apply safe fixes
+- **Import order** (same for Biome and ESLint): npm packages → blank line → `@/` / relative → blank line → styles last
+- Run lint before push; treat warnings as debt with a burn-down plan.
+- Husky **pre-commit** runs lint-staged; **commit-msg** runs commitlint; **pre-push** runs `pnpm run test`.
+- After `git init`, run `pnpm install` so the `prepare` script can install Husky hooks.
+
+## Environment variables
+
+- Never commit `.env`.
+- Prefix client-visible vars for your bundler (`VITE_*`).
+- Validate required env at boot for production deploys.
+- Document every variable in `.env.example` with a one-line purpose.
+
+## Testing strategy
+
+- Unit/integration with **Vitest + React Testing Library** for components and feature behavior.
+- Prefer `getByRole` / label text over test IDs.
+- Mock network at the domain boundary (`services/api` or RTK endpoints), not inside random UI helpers.
+- E2E with **Cypress** for critical user journeys (load home, submit form).
+- Keep e2e thin: happy paths + one failure path per critical flow.
+- Storybook for isolated UI development and visual review.
+- Write stories for states (loading, empty, error, success), not only the happy path.
+
+Aim for: fast unit tests on logic, fewer integration tests on features, thin e2e on happy paths.
+
+## Accessibility
+
+- Prefer semantic HTML (`button`, `label`, `nav`) before ARIA.
+- Ensure keyboard focus order matches visual order.
+- Pair every input with a visible label; surface async success/errors with `aria-live` and a stable `data-testid` for tests.
+
+## Deployment notes
+
+1. `pnpm build`
+2. Serve the bundler output (`dist/` / `build/`) behind HTTPS.
+3. Configure SPA fallback to `index.html` for client routes.
+4. Inject production env vars in the host (Vercel, Netlify, Cloudflare, nginx, etc.).
+5. Enable error tracking DSN in production only.
+
+## Production checklist
+
+- [ ] Env vars documented and set
+- [ ] Lint + tests in CI
+- [ ] Bundle analyzed for accidental secrets
+- [ ] Monitoring verified with a test event
+- [ ] Accessibility pass on primary flows
+- [ ] Error states designed for `/posts` and `/feedback`
+- [ ] Auth expiry path handled (401 → re-login / token refresh)

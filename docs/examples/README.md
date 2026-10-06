@@ -1,0 +1,14 @@
+# Examples index
+
+Each guide below explains **how to use** the wired library, **community best practices**, and **copy-paste examples** that match this project's folder layout.
+
+| File               | Topic                  | Live route             |
+| ------------------ | ---------------------- | ---------------------- |
+| `state.md`         | Client state patterns  | `/counter`             |
+| `data-fetching.md` | Server state / caching | `/posts`               |
+| `forms.md`         | Forms + validation     | `/feedback`            |
+| `styling.md`       | Visual system          | all pages              |
+| `api.md`           | HTTP layer             | used by posts/feedback |
+| `testing.md`       | Unit / E2E / visual    | `tests/`               |
+
+Start with the live route, then read the matching doc while you extend the feature.

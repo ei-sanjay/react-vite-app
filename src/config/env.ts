@@ -1,0 +1,9 @@
+/**
+ * Central place for reading public env vars.
+ * Injected by Vite natively, by Rsbuild via `loadEnv` + `source.define`,
+ * or by webpack DefinePlugin as `import.meta.env`.
+ */
+export const env = {
+  apiBaseUrl: import.meta.env.VITE_API_BASE_URL || 'https://jsonplaceholder.typicode.com',
+  mode: import.meta.env.MODE || 'development',
+} as const;
